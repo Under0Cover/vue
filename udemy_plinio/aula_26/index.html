@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 26</title>
+</head>
+<body>
+    <div id='app'>
+        <button @click="login = !login">Toogle</button>
+        <template v-if="login">
+            <label>Login</label>
+            <input placeholder="Login" key="campo-login">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Email" key="campo-email">
+        </template>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                login: true
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!--
+    VAMOS APRENDER A CONTROLAR A REUTILIZAÇÃO DOS ELEMENTOS.
+    O VUE TEM POR PADRÃO REUTILIZAR OS ELEMENTOS JÁ RENDERIZADOS. INCLUSIVE, ESSA É UMA DAS SUAS VANTAGENS.
+    QUANDO UTILIZAMOS A CHAVE KEY, ESTAVA DIZENDO AO VUE, QUE QUERMOS QUE O ELEMENTO SEJA RE-RENDERIZADO.
+    NÃO QUEREMOS REUTILIZAR O ELEMENTO QUE POSSUÍ UMA CHAVE KEY.
+-->

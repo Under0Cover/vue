@@ -1,0 +1,23 @@
+.caixa {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin-right: 100px;
+    background-color: gray;
+}
+
+.coral {
+    background-color: lightcoral;
+}
+
+.verde {
+    background-color: lightgreen;
+}
+
+.azul {
+    background-color: lightblue;
+}
+
+.circulo {
+    border-radius: 100%;
+}

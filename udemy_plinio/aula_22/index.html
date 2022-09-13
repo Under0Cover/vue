@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Aula 22</title>
+</head>
+<body>
+    <div id='app'>
+        <!--
+            NOTA:
+                É NECESSÁRIO UMA OBSERVAÇÃO!
+
+                QUANDO HOUVER A NECESSIDADE DE ESCREVER NOMES COMPOSTOS, COMO O BACKGROUND-COLOR, POR EXEMPLO;
+                PODE SER FEITA COMO NO EXEMPLO A BAIXO, UTILIZANDO-SE DAS ASPAS PARA ENVOLVER O NOME SEPARANDO-O PELO SINAL, OU ENTÃO;
+                PODE-SE UTILIZAR O ESTILO CAMEL CASE, FAZENDO ASSIM, A GRAFIA CORRETA SER backgroundColor, E NESSE CASO, NÃO HÁ A NECESSIDADE DE ASPAS
+        -->
+        <div 
+            style="width: 200px; height: 200px"
+            :style="{ 'background-color': cor, 
+                        height: altura + 'px' }">
+            <!-- APLICAR CSS INLINE NÃO É RECOMENDADO, PREFIRA SEMPRE APLICAR COMPUTED -->
+        </div>
+        <div :style="estiloCSS"></div>
+        <!-- FORMA MAIS CORRETA DE SER APLICADA -->
+        <div :style="[ estiloCSS, { border: '2px solid black', 'background-color': 'blue'}]">
+        <!-- FORMA DE PASSAR OS ESTILOS DE CSSS POR ARRAY -->
+        </div>
+        <input v-model="cor" placeholder="cor">
+        <input v-model.number="altura" placeholder="Tamanho em PX">
+        <!-- USANDO O MODIFICADOR ".NUMBER" PARA GARANTIR A CHEGADA DE UM NÚMERO -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                cor: '',
+                altura: 200
+            },
+            computed: {
+                estiloCSS: function() {
+                    return {
+                        backgroundColor: this.cor,
+                        height: (this.altura + 10) + 'px',
+                        width: '100px'
+                    };
+                }
+            }
+        });
+    </script>
+</body>
+</html>

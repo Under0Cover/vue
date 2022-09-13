@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 35</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>Produtos:</h1>
+        <ul>
+            <li v-for="produto in produtos" :key="produto.id">{{ produto.nome }}</li>
+        </ul>
+        <button @click="adicionarProduto">Adicionar Produto</button>
+        <hr><hr>
+        <button @click="arraySlice = produtos.slice(0, 4)">Substituir Array</button>
+        <!--
+            SEGUNDO O INTRUTOR DO CURSO:
+                O MÉTODO SLICE, ELE CRIA UM NOVO ARRAY.
+                ELE NÃO FAZ MUTAÇÃO NO ARRAY ORIGINAL.
+                ENTRETANTO, ELE NÃO FEZ A DEMONSTRAÇÃO DOS DOIS ARRAYS.
+                E EU VOU FAZER ESSA PARTE PARA PODER VISUALIZAR A DIFERENÇA DOS ARRAYS
+        -->
+                <p>Produtos</p>
+                <ul>
+                    <li v-for="produto in produtos" :key="produto.id">{{ produto.nome }}</li>
+                </ul>
+                <p>Slice</p>
+                <ul>
+                    <li v-for="produto in arraySlice" :key="produto.id">{{ produto.nome }}</li>
+                </ul>
+                <!-- 
+                    ASSIM FICA A RESPOSTA VISUAL.
+                    O ARRAY DE PRODUTOS É EXIBIDO SEMPRE. E SOFRERÁ TODA E QUALQUER ALTERAÇÃO DOS OUTROS BOTÕES.
+                    E O ARRAY COM O SLICE, VAI SER APRESENTADO ASSIM QUE FOR CLICADO NO BOTÃO ESPECÍFICO
+
+                    MESMO TENDO COLOCADO O SLICE EM OUTRA VARIÁVEL PARA TER UMA RESPOTA VISUAL.
+                    HÁ UMA INFORMAÇÃO A SER PASSADA.
+                    CASO, COMO NO EXEMPLO O SLICE, SEJA APLICADO, O VUE VAI TENTAR APROVEITAR O MÁXIMO OS ELEMENTOS QUE JÁ ESTÃO RENDERIZADOS.
+                    AO INVÉS DE COMEÇAR DA POSIÇÃO 0 E IR ATÉ A 4, APLICANDO O SLICE DA 4 EM DIANTE,
+                    O VUE, VAI TIRANDO OS ELEMENTOS ATÉ A POSIÇÃO 4, DEIXANDO AS OUTRAS POSIÇÕES QUE FORAM RENDERIZADAS
+                 -->
+        <hr><hr>
+        <!-- EXIBINDO AS LIMITAÇÕES DO VUE -->
+        <button @click="substituirProduto">Substituir Produtos</button>
+        <!-- OUTRA LIMITAÇÃO DO VUE -->
+        <button @click="cortarArray">Cortar Array</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                produtos: [
+                    { id: 1, nome: 'Monitor'},
+                    { id: 2, nome: 'Teclado'},
+                    { id: 3, nome: 'Mouse'},
+                    { id: 4, nome: 'Processador'},
+                ],
+                arraySlice: []
+            },
+            methods: {
+                adicionarProduto: function(event){
+                    var id = this.produtos.length + 1;
+                    this.produtos.push({
+                        id: id, nome: 'Produto ' + id
+                    });
+                    /*
+                        CAUSANDO UMA MUTAÇÃO NO ARRAY E O VUE SABE MANIPULAR ESSA ALTERAÇÃO
+                        ESSE É O COMPORTAMENTO DO VUE COM MÉTODOS DE MUTAÇÃO DE ARRAY.
+                        MAS EXISTEM SITUAÇÕES EM QUE VOCÊ VAI SUBSTITUIR O ARRAY INTEIRO.
+                        QUANDO UTILIZAMOS O FILTER, POR EXEMPLO, VAMOS CRIAR UMA CÓPIA DO ARRAY
+                        COM ISSO, VAMOS ALOCAR A CÓPIA DO ARRAY EM UMA NOVA REFÊRENCIA DE MEMÓRIA E NÃO MAIS VAMOS 'MUTAR' O ARRAY ORIGINAL
+                    */ 
+                },
+                /*
+                    SEGUNDO O INSTRUTOR:
+                        O VUE POSSUI ALGUMAS LIMITAÇÕES NO SISTEMA REATIVO. LIMITAÇÕES ESSAS, QUE O INSTRUTOR ATRIBUÍ A 'RECURSOS DISPONÍVEIS NO JAVASCRIPT'.
+                        LIMITAÇÕES QUE VAMOS EXPLORAR AGORA
+                */
+                substituirProduto: function(event){
+                    var tamanho = this.produtos.length;
+                    var id = tamanho + 1001;
+                    var indice = Math.round( tamanho / 2 );
+                    var novoProduto = { id: id, nome: 'Produto ' + id};
+                    // console.log(tamanho, indice);
+                    // this.produtos[indice] = novoProduto; // NÃO REATIVO
+                    /*
+                        OBSERVAÇÃO: O INSTRUTOR ENFATIZA QUE O COMANDO ACIMA NÃO É REATIVO, MAS FALHA EM EXPLICAR O MOTIVO DA NÃO REAÇÃO.
+                        APENAS FOI INFORMADO QUE O COMANDO É 'NÃO REATIVO', E ENFATIZADO ESSA INFORMAÇÃO.
+                    */
+                    // Vue.set(this.produtos, indice, novoProduto); // MÉTODO ESTÁTICO
+                    // this.$set(this.produtos, indice, novoProduto); // MÉTODO DE INSTÂNCIA
+                    this.produtos.splice(indice, 1, novoProduto); // UTILIZANDO RECURSOS DO JAVASCRIPT
+                },
+                cortarArray: function(event){
+                    // this.produtos.length = 2; // NÃO REATIVO
+                    this.produtos.splice(2);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!--
+    OBVIAMENTE, HÁ CONFLITO DE 'ID' UTILIZANDO ESSA FORMA DE MODIFICAR O ARRAY.
+    PARA QUE NÃO HAJA ESSE CONFLITO, EU UTILIZEI SOMAR POR 1001
+-->

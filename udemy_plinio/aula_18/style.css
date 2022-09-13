@@ -1,0 +1,12 @@
+.caixa {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin-right: 100px;
+    background-color: gray;
+}
+
+.a-coral {
+    background-color: lightcoral;
+    /* ESTOU USANDO A CLASSE COM O TRAÇO PARA MOSTRAR COMO CLASSES COM CARACTERES ESPECIAIS SÃO TRATADOS */
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 16</title>
+</head>
+<body>
+    <div id="app">
+        <p>Nome: {{ nomeCompleto }}</p>
+        <input @keyup.enter="alterarNome">    
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                primeiroNome: 'Tales',
+                segundoNome: 'Oliver'
+            },
+            computed: { /*
+                COMPUTED COMO FUNÇÃO QUE NÃO RECEBE SETTERS.
+                nomeCompleto: function() {
+                    return this.primeiroNome + ' ' + this.segundoNome;
+                } */
+                // COMPUTED SEM FUNÇÃO QUE RECEBE SETTERS.
+                nomeCompleto: { // A PRIMEIRA MODIFICAÇÃO É SETAR A COMPUTED COMO OBJETO E NÃO COMO FUNÇÃO!
+                    // AQUI DENTRO EU POSSO CONFIGURAR AS PROPRIEDADES DO OBJETO, SENDO ASSIM, CONSIGO CONFIGURAR O GET E O SET.
+                    get: function() {
+                        // AQUI EU FAÇO A MESMA FUNÇÃO DO EXEMPLO ACIMA!
+                        return this.primeiroNome + ' ' + this.segundoNome;
+                    },
+                    set: function(novoNome) { // AQUI EU POSSO IMPLEMENTAR UMA FUNÇÃO E A LÓGICA NECESSÁRIA PARA SETAR
+                        var nomes = novoNome.split(' '); // AQUI EU PEGO O VALOR QUE VEM DO METHOD E QUEBRO A STRING NO ESPAÇO PARA SEPARAR OS NOMES
+                        this.primeiroNome = nomes[0]; // O PRIMEIRO NOME VAI ESTAR NA POSIÇÃO 0
+                        this.segundoNome = nomes[nomes.length - 1]; // AQUI EU VOU BUSCAR O NOME NA ULTIMA POSIÇÃO
+                        // REPARE QUE DA MESMA FORMA QUE AS PROPRIEDADES DO DATA ESTÃO ACESSIVEIS AO GET, ELAS TAMBÉM ESTÃO ACESSIVEIS AO SET.
+                        // COMO A FUNÇÃO DO GET RETORNA EXATAMENTE AS PROPRIEDADES DO DATA, NA FUNÇÃO SET, EU MODIFICO ELAS TAMBÉM NAS PROPRIEDADES DO DATA
+                    }
+                }
+            },
+            methods: {
+                alterarNome: function(event) {
+                    this.nomeCompleto = event.target.value;
+                }
+            }
+        });
+        </script>
+</body>
+</html>
+
+<!--
+    AS COMPUTED POR DEFAULT, SÃO FUNÇÕES GETTERS. OU SEJA, APENAS RETORNAM VALORES.
+    CASO SEJA NECESSÁRIO SETTAR ALGUM VALOR PARA A COMPUTED, POR PADRÃO, ISSO NÃO É PERMITIDO.
+    MAS, NÓS VAMOS APRENDER A CONTORNAR ESSE PROBLEMA.
+
+    NO EXEMPLO, EXISTE UMA COMPUTED QUE EXIBIDA NO TEMPLATE. A COMPUTED DEPENDE DE DUAS PROPRIEDADES SETADAS NO DATA.
+    NA TENTATIVA DE SETTAR UM VALOR PARA A COMPUTED, FOI CRIADO O METHOD ALTERARNOME.
+    ATÉ ESSE PONTO, UM ERRO É EXIBIDO NO CONSOLE.
+-->

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Aula 33</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>TODO LIST:</h1>
+        <!-- LISTA COM KEY -->
+        <ul class="ulDoFor">
+            <li class="itemIterado" v-for="produto in produtos" :key="produto.id">
+                <input class="checkboxTarefa" type="checkbox" name="{{ produto.nome }}" id="{{ produto.id }}">
+                {{ produto.nome }}
+            </li>
+        </ul>
+        <button @click="inverterLista">Inverter Lista</button>
+        <button @click="adicionarProduto = !adicionarProduto">Adicionar Produto</button>
+        <input v-if="adicionarProduto" @keyup.enter="adicionarProdutoInput" placeholder="Adicione Produto">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                produtos: [
+                    { id: 1, nome: 'Adicionar Itens ao TODO LIST'}
+                ],
+                adicionarProduto: false
+            },
+            methods: {
+                inverterLista: function(){
+                    return this.produtos.reverse();
+                },
+                adicionarProdutoInput: function(){
+                    var id = this.produtos.length + 1;
+                    this.produtos.push(
+                        { id: id, nome: event.target.value }
+                    );
+                },
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!--
+    PARA FINS DE PRÁTICA, EU MODIFIQUEI UM POUCO OS CÓDIGOS QUE FORAM ENSINADOS DURANTE A AULA.
+    EU NÃO ESTAVA GOSTANDO DE ADICIONAR O NOME DO PRODUTO COMO ''PRODUTO  '+ ID'.
+        ENTÃO, EU MODIFIQUEI O METHODS ADICIONARPRODUTO, COLOCANDO-O NO DATA, PARA PODER CONTROLAR A EXIBIÇÃO DO INPUT.
+        DAÍ, NO INPUT, VOCÊ DIGITA O ITEM QUE QUER QUE SEJA ADICIONADO.
+        E ASSIM, VOCÊ VAI ADICIONAR UM PRODUTO COM O NOME QUE DESEJAR
+-->

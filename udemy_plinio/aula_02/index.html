@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 02</title>
+</head>
+<body>
+
+    <!--
+        ABAIXO A FORMA SIMPLES DE UTILIZAR O VUE COM SUAS PROPRIEDADES.
+        <div id="app">
+            <p>Curso: {{ curso }}</p>
+            <p>Instrutor: {{ instrutor() }}</p>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    curso: 'VueJS'
+                },
+                methods: {
+                    instrutor: function(){
+                        return 'Plínio Naves'
+                    }
+                }
+            })
+        </script>
+    -->
+
+
+
+    
+    
+    <!-- ABAIXO A FORMA COM QUE O VUE TRATA A SI MESMO INTERNAMENTE COMBINANDO AS SUAS PROPRIEDADES -->
+    <div id="app">
+        <p>Curso: {{ curso }}</p>
+        <p>Instrutor: {{ nomeDoInstrutor() }}</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                curso: 'VueJS',
+                instrutor: 'Plínio Naves'
+            },
+            methods: {
+                nomeDoInstrutor: function(){
+                    return this.instrutor;
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

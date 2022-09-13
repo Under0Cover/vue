@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 29</title>
+</head>
+<body>
+    <div id='app'>
+        <ul>
+            <li v-for="(produto, indice) in produtos">Produto: {{ indice }} - {{ produto }}</li>
+        </ul>
+        <!-- NA ÚLTIMA AULA, EU TINHA FEITO O V-FOR COM INDICE EM UMA TABELA -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                textoProduto: 'Produto',
+                produtos: [
+                    'Monitor',
+                    'Teclado',
+                    'Mouse'
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

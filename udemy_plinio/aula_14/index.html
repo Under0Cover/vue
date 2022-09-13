@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 14</title>
+</head>
+<body>
+    <div id="app">
+        <p>Nome: {{ nomeCompleto }}</p>
+        <button @click="alterarNome">TROCAR</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                //nomeCompleto: 'Tales Oliver',
+                primeiroNome: 'Tales',
+                ultimoNome: 'Oliver'
+            },
+            computed: {
+                nomeCompleto: function(){
+                    return this.primeiroNome + ' ' + this.ultimoNome;
+                }
+            },
+            // watch: {
+            //     primeiroNome: function(novoPrimeiroNome, antigoPrimeiroNome) {
+            //         console.log('Watch Primeiro Nome: ');
+            //         console.log('this.nomeCompleto: ' + this.nomeCompleto);
+            //         console.log('this.primeiroNome: ' + this.primeiroNome);
+            //         console.log('this.ultimoNome: ' + this.ultimoNome);
+            //         console.log('novoPrimeiroNome: ' + novoPrimeiroNome);
+            //         console.log('antigoPrimeiroNome: ' + antigoPrimeiroNome);
+            //         this.nomeCompleto = novoPrimeiroNome + ' ' + this.ultimoNome;
+            //         console.log('Após a troca: ');
+            //         console.log('this.nomeCompleto: ' + this.nomeCompleto);
+            //         console.log('this.primeiroNome: ' + this.primeiroNome);
+            //         console.log('this.ultimoNome: ' + this.ultimoNome);
+            //         console.log('novoPrimeiroNome: ' + novoPrimeiroNome);
+            //         console.log('antigoPrimeiroNome: ' + antigoPrimeiroNome);
+            //         console.log('Resultado: ' + this.nomeCompleto);
+            //         console.log('Finalizado Watch Primeiro Nome!');
+            //     },
+            //     ultimoNome: function(novoUltimoNome, antigoUltimoNome) {
+            //         console.log('Watch Último Nome: ');
+            //         console.log('this.nomeCompleto: ' + this.nomeCompleto);
+            //         console.log('this.primeiroNome: ' + this.primeiroNome);
+            //         console.log('this.ultimoNome: ' + this.ultimoNome);
+            //         console.log('novoUltimoNome: ' + novoUltimoNome);
+            //         console.log('antigoUltimoNome: ' + antigoUltimoNome);
+            //         this.nomeCompleto = this.primeiroNome + ' ' + novoUltimoNome;
+            //         console.log('Após a troca: ');
+            //         console.log('this.nomeCompleto: ' + this.nomeCompleto);
+            //         console.log('this.primeiroNome: ' + this.primeiroNome);
+            //         console.log('this.ultimoNome: ' + this.ultimoNome);
+            //         console.log('novoUltimoNome: ' + novoUltimoNome);
+            //         console.log('antigoUltimoNome: ' + antigoUltimoNome);
+            //         console.log('Resultado: ' + this.nomeCompleto);
+            //         console.log('Finalizado Watch Último Nome!');
+            //     }
+            //},
+            methods: {
+                alterarNome: function(event) {
+                    console.log('Função alterarNome: ');
+                    console.log('this.nomeCompleto: ' + this.nomeCompleto);
+                    console.log('this.primeiroNome: ' + this.primeiroNome);
+                    console.log('this.ultimoNome: ' + this.ultimoNome);
+                    troca = this.primeiroNome
+                    this.primeiroNome = this.ultimoNome;
+                    this.ultimoNome = troca;
+                    console.log('Nome trocado!');
+                    console.log('this.nomeCompleto: ' + this.nomeCompleto);
+                    console.log('this.primeiroNome: ' + this.primeiroNome);
+                    console.log('this.ultimoNome: ' + this.ultimoNome);
+                    console.log('Fim da função alterarNome');
+                }
+            }
+        });
+        </script>
+</body>
+</html>

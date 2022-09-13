@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 29</title>
+</head>
+<body>
+    <div id='app'>
+        <ul>
+            <li v-for="produto in produtos">{{ textoProduto }}: {{ produto }}</li>
+        </ul>
+        <hr><hr><hr><hr>
+        <p>Meu modo:</p>
+        <table>
+            <tr>
+                <td>{{ textoProduto }}</td>
+                <td>{{ textoValor }}</td>
+            </tr>
+            <tr v-for="produto, index in produtos">
+                <td>{{ produto }}</td>
+                <td>{{ valores[index]}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                textoProduto: 'Produto',
+                textoValor: 'Valor',
+                produtos: [
+                    'Monitor',
+                    'Teclado',
+                    'Mouse'
+                ],
+                valores: [
+                    1500,
+                    430,
+                    85
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

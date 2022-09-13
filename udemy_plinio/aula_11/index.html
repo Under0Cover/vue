@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 11</title>
+</head>
+<body>
+    <div id="app">
+        <p>Utilizando v-bind e v-on sem atalhos</p>
+        <a v-bind:href="docs">VueJS</a>
+        <br><br><br>
+        <button v-on:click="onClick">Clique</button>
+
+        <hr>
+
+        <p>Utilizando v-bind e v-on com atalhos</p>
+        <a :href="docs">VueJS</a>
+        <br><br><br>
+        <button @click="onClick">Clique</button>
+        <!--
+            RELEMBRANDO:
+                V-BIND  -> UTILIZANDO PARA FAZER DATA BINDING
+                V-ON    -> MANIPULAR EVENTOS
+        -->
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                docs: 'https://vuejs.org'
+            },
+            methods: {
+                onClick: function(event){
+                    console.log('Evento: ', event.type);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

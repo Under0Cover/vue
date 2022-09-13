@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 13</title>
+</head>
+<body>
+    <div id="app">
+        <p>Nome Original: {{ curso }}</p>
+        <p>Nome Invertido (computed): {{ cursoInvertidoComputed }}</p> <!-- COMPUTED NÃO PRECISAM SEREM CHAMADAS COMO FUNÇÃO -->
+        <p>Nome Invertido (method): {{ cursoInvertidoMethods() }}</p> <!-- METHODS PRECISAM SEREM CHAMADOS COMO FUNÇÃO -->
+        <p>Autor: {{ nomeDoAutorInteiro ? 'Plínio Naves' : 'Plínio' }}</p>
+        <button @click="nomeDoAutorInteiro = !nomeDoAutorInteiro">Alterar Exibição</button>
+        <hr>
+        <input @keyup.enter="alterarNomeDoCurso" placeholder="Modifique o Curso e pressione Enter">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                curso: 'Curso de VueJS',
+                nomeDoAutorInteiro: false
+            },
+            computed: {
+                cursoInvertidoComputed: function(){
+                    console.log('Computed Executada!');
+                    return this.curso.split('').reverse().join('');
+                }
+            },
+            methods: {
+                alterarNomeDoCurso: function(event){
+                    this.curso = event.target.value;
+                },
+                cursoInvertidoMethods: function(){
+                    console.log('Method Executada!');
+                    return this.curso.split('').reverse().join('');
+                }
+            }
+            /*
+                ENTÃO QUAL A DIFERENÇA ENTRE AS COMPUTED E OS METHODS?
+                    A DIFERENÇA É QUE AS COMPUTED ELA TEM A DEPÊNCIA DA PROPRIEDADE, NO CASO, "CURSO", SENDO SOMENTE RE-EXECUTADA, CASO A PROPRIEDADE "CURSO" SEJA MODIFICADA, OU SEJA, ELA FICA CACHEADA.
+                    ENQUANTO O METHOD É EXECUTADO A CADA NOVA RENDERIZAÇÃO, INCLUSIVE SE OUTRA PROPRIEDA DIFERENTE DA QUAL ELE ESTÁ TRABALHANDO SEJA MODIFICADA.
+                    NA FORMA DE EXEMPLIFICAR ISSO, HÁ DOIS CONSOLE.LOG NOS DOIS EXEMPLOS E QUANDO ALTERADO O NOME DO INSTRUTOR ATRAVÉS DO BOTÃO, PERCEBA QUE LOGA APENAS O METHOD.
+            */
+        });
+        </script>
+</body>
+</html>

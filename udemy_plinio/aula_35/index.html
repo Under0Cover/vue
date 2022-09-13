@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 35</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>Tarefas</h1>
+        <!-- ARRAY CONVENCIONAL -->
+        <ul>
+            <li v-for="tarefa in tarefas" :key="tarefa.id">{{ tarefa.titulo }}</li>
+        </ul>
+        <hr>
+        <!-- ARRAY COM V-IF -->
+        <ul>
+            <li v-for="tarefa in tarefas" :key="tarefa.id" v-if="!tarefa.completa">{{ tarefa.titulo }}</li>
+        </ul>
+        <hr>
+        <!-- ARRAY COM COMPUTED -->
+        <ul>
+            <li v-for="tarefa in tarefasIncompletas" :key="tarefa.id">{{ tarefa.titulo }}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                tarefas: [
+                    { id: 1, titulo: 'Aprender JavaScript', completa: true },
+                    { id: 2, titulo: 'Aprender VueJS', completa: false },
+                    { id: 3, titulo: 'Aprender VueX', completa: false },
+                    { id: 4, titulo: 'Aprender VueRouter', completa: false },
+                ]
+            },
+            computed: {
+                tarefasIncompletas: function(){
+                    return this.tarefas.filter(function(tarefa) {
+                        return !tarefa.completa;
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!--
+    O V-FOR TEM PRIORIDADE SOBRE O V-IF.
+    ENTÃO, O VUE VAI EXECUTAR O V-FOR ANTES DO V-IF.
+    COM ISSO, PODE SER QUE ACONTEÇA DE FAZER UMA ITERAÇÃO COM ELEMENTOS QUE NEM SERÃO EXIBIDOS NA TELA.
+    COMO ISSO GASTA PROCESSAMENTO E TEMPO, ATÉ ENTÃO, DESNECESSÁRIOS, VAMOS APLICAR UMA FORMA DE O V-FOR TRAZER APENAS OS ELEMENTOS NECESSÁRIOS PARA AQUELE MOMENTO.
+    VAMOS UTILIZAR A COMPUTED COMO AUXÍLIO PARA FAZER UMA FUNÇÃO FILTER.
+        A FUNÇÃO FILTER, RETORNA UM NOVO ARRAY SEM MODIFICAR O ARRAY ORIGINAL.
+        E NO PARAMETRO DA FUNÇÃO FILTER, VAMOS PASSAR UMA OUTRA FUNÇÃO, A CHAMADA FUNÇÃO DE CALLBACK.
+        COMO A FUNÇÃO FILTER VAI ITERAR SOBRE O NOSSO ARRAY, O RETORNO DEVERÁ SER SE VAMOS INCLUIR A LINHA NO RETORNO DA FUNÇÃO FILTER
+-->

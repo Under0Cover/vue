@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 32</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>Números</h1>
+        <ul>
+            <li v-for="(valor, indice) in 30">Indice: {{ indice }} - Valor:{{ valor }}</li>
+            <!--
+                OBSERVAÇÕES:
+                    SIM, PODERIA PASSA O NÚMERO POR UM ELEMENTO
+                    
+                    O RETORNO SERÁ DE 1 A 30, NÃO DO ZERO
+                    O ÍNDICE DO OBJETO SERÁ A PARTIR DO ZERO
+            -->
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+
+        });
+    </script>
+</body>
+</html>

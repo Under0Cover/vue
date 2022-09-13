@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 10</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="onClick">Botão Esquerdo</button>
+        <button v-on:click.middle="onClick">Botão Central</button>
+        <button v-on:click.right="onClick">Botão Direito</button>
+        <button v-on:click.right.prevent="onClick">Botão Direito Sem Menu</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                onClick: function(event){
+                    console.log('Botão ' + event.button + ' pressionado!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

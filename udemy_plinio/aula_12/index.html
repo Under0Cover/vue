@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 12</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ curso }} === INVERTIDO É: === {{ curso.split('').reverse().join('') }}</p>
+        <!-- EXEMPLO NÃO RECOMENDADO A SE FAZER EM PROJETOS. APENAS PARTE EXEMPLIFICADA PARA DEMONSTAR COMO PODEMOS ESCREVER EXPRESSÕES JAVASCRIPT SIMPLES NO TEMPLATE -->
+        <!-- PARA EVITAR ESSE TIPO DE UTILIZAÇÃO, HÁ A NOSSA DISPOSIÇÃO AS COMPUTED PROPERTIES OU, NUMA TRADUÇÃO MAIS FIEL, DADOS COMPUTADOS-->
+        <hr>
+        <p>{{ curso }} === INVERTIDO É: === {{ cursoInvertido }}</p>
+        <hr>
+        <input @keyup.enter="alterarNomeDoCurso" placeholder="Modifique o Curso e pressione Enter">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                curso: 'Curso de VueJS'
+            },
+            computed: {
+                cursoInvertido: function(){
+                    return this.curso.split('').reverse().join('');
+                }
+            },
+            methods: {
+                alterarNomeDoCurso: function(event){
+                    this.curso = event.target.value;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

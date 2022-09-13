@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 28</title>
+</head>
+<body>
+    <div id='app'>
+        <button @click="mostrar = !mostrar">Toggle</button>
+        <p v-if="mostrar">Diretiva v-if: "{{ mostrar }} ==>"<span>{{ texto }}</span></p>
+        <p v-show="mostrar">Diretiva v-show: "{{ mostrar }} ==>"<span>{{ texto }}</span></p>
+        <input v-model="texto">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                mostrar: true,
+                texto: 'Olá VueJS'
+            }
+
+        });
+    </script>
+</body>
+</html>
+
+<!--
+    AS DIFERENÇAS ENTRE V-IF E V-SHOW ACONTECEM "NOS BASTIDODRES".
+    ENQUANTO O BLOCO DE V-IF ESTIVER SETADO COMO FALSE, NENHUMA RENDERIZAÇÃO DAS PROPRIEDADES SEGUINTE SERÁ RENDERIZADA.
+    NO CASO DO V-SHOW, MESMO COM O ELEMENTO OCULTO DO 'FRONT-END', ELE AINDA ESTÁ NO 'BACK' SENDO RENDERIZADO E CONSUMINDO RECURSOS.
+
+    ENTÃO, A MELHOR UTILIZAÇÃO DOS RECURSOS VAI SER INDICADA NA FREQUÊNCIA EM QUE O OBJETO PRECISA SER OCULTO OU EXIBIDO.
+    QUANTO MAIOR A FREQUÊNCIA DE TROCAS, MELHOR USAR O V-SHOW.
+    NO CASO DE POUCA FREQUÊNCIA DE TROCAS, MELHOR USAR O V-IF
+-->

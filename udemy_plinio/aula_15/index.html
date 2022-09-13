@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 15</title>
+</head>
+<body>
+    <div id="app">
+        <p>Nome: {{ nomeCompleto }}</p>
+        <button @click="alterarNome">Alterar Nome</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                nomeCompleto: 'Plínio Naves'
+            },
+            methods: {
+                alterarNome: function(event){
+                    this.nomeCompleto = 'Naves Plínio';
+                }
+            },
+            watch: {
+                nomeCompleto: function(novoNomeCompleto, antigoNomeCompleto) {
+                    var vm = this; // PELOS CONHECIMENTOS QUE JÁ BUSQUEI ESSA É A FORMA PORCA DE SE FAZER O BIND, MAS VAMOS LÁ!
+                    // A FUNÇÃO SETTIMEOUT SERVE MUITO BEM DE EXEMPLO DE FUNÇÃO ASSÍNCRONA. AQUI PODERIA, POR EXEMPLO, ESTAR UMA COMUNICAÇÃO COM UM SERVIDOR.
+                    setTimeout(function(){
+                        // NESTE CONTEXTO, ESSA FUNÇÃO É UMA CLOSURE, POR ISSO A NECESSIDADE DO BIND NO LUGAR DO THIS.
+                        vm.nomeCompleto = antigoNomeCompleto;
+                    }, 4000);
+                }
+            }
+        });
+        </script>
+</body>
+</html>
+
+<!--
+    QUANDO UTILIZAR OS WATCHERS?
+        UTILIZAMOS QUANDO PRECISAMOS EXECUTAR UMA OPERAÇÃO ASSÍNCRONA OU QUANDO NÃO PRECISAMOS RETORNAR NENHUM VALOR.
+    LEMBRANDO QUE AS COMPUTED FUNCIONAM COMO FUNÇÕES GETTERS. E FUNÇÕES GETTERS PRECISAM RETORNAR ALGUM VALOR! E NO CASO DAS COMPUTED, TEMOS QUE RETORNAR UM VALOR SÍNCRONO.
+    VALOR SÍNCRONO, SIGNIFICA QUE O VALOR VAI ESTAR IMEDITAMENTE DISPONÍVEL.
+    SE POR EXEMPLO PRECISARMOS ACESSAR UM SERVIDOR OU UMA API EXTERNA, NÃO PODEMOS NOS UTILIZAR DAS COMPUTED. NESSE CASO TERÍAMOS QUE NOS UTILIZAR DOS WATCHERS.
+-->
