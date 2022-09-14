@@ -11,6 +11,7 @@
             <div class="row">
                 <div>
                     <!-- TODO: Add booking-form -->
+                    <booking-form @booking-created="addBooking" :cabins="cruise.cabins"></booking-form>
 
                 </div>
                 <div>
@@ -25,6 +26,7 @@
 <script>
 import BookingList from './BookingList.vue';
 // TODO: Register next component
+import BookingForm from './BookingForm.vue';
 export default {
     name: 'OliverHost',
 data() {
@@ -48,10 +50,20 @@ data() {
 components: {
     BookingList,
     // TODO: Add next component
-
+    BookingForm
 },
 
 // TODO: Add methods
+methods: {
+    addBooking(cabinIndex) {
+        const cabin = this.cruise.cabins[cabinIndex];
+        const booking = {
+            cabin: cabin.name,
+            price: cabin.price
+        }
+        this.bookings.push(booking);
+    }
+}
 }
 </script>
 

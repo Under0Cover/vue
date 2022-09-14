@@ -5,7 +5,7 @@
         </h2>
 
         <div class="row" v-for="(booking, index) in bookings" :key="index">
-            <div>{{ booking.name }} </div>
+            <div>{{ booking.cabin }} </div>
         </div>
 
         <h3 class="row">
