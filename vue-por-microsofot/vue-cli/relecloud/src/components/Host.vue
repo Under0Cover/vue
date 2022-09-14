@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <!-- TODO: Add booking-list -->
-
+                    <booking-list :bookings="bookings"></booking-list>
                 </div>
             </div>
     </div>
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import BookingList from './BookingList.vue';
+// TODO: Register next component
 export default {
     name: 'OliverHost',
 data() {
@@ -43,6 +45,11 @@ data() {
 },
 
 // TODO: Add components
+components: {
+    BookingList,
+    // TODO: Add next component
+
+},
 
 // TODO: Add methods
 }
