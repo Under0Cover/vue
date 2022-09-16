@@ -9,19 +9,46 @@
 </head>
 <body>
     <div id='app'>
-        
+        <p>Objetos</p>
+        <ul>
+            <li v-for="(valor, chave) in produto">{{ chave }}: {{ valor }}</li>
+        </ul>
+        <button @click="adicionarPropriedade">Adicionar Propriedade</button>
+        <button @click="substituirObjeto">Substituir Objeto</button>
     </div>
 
     <script>
         new Vue({
             el: '#app',
-            
+            data: {
+                produto: {
+                    id: 2,
+                    nome: 'Teclado',
+                    marca: 'Dell'
+                },
+                // Por isso, vamos deixar ela criadaaqui
+                usuario: {
+                    nome: '',
+                    idade: 0
+                }
+            },
+            methods: {
+                adicionarPropriedade: function(event) {
+                    // O Vue não permite ao desenvolvedores adicionar propriedades ao nível raiz da nossa instância
+                    // Por exemplo, não podemos 'criar' a propriedade 'usuarios'
+                    // Devemos criar a propriedade em data e após, conseguimos manipular essa propriedade
+                    Vue.set(this.produto, 'preco', 100);
+
+                },
+                substituirObjeto: function(event) {
+                    // Vou atribuir a propriedade produto o retorno do Object.assign nativo do JS
+                    this.produto = Object.assign({}, this.produto, {
+                        preco: 50,
+                        cor: 'preta'
+                    });
+                }
+            }
         });
     </script>
 </body>
 </html>
-
-<!--
-    OBVIAMENTE, HÁ CONFLITO DE 'ID' UTILIZANDO ESSA FORMA DE MODIFICAR O ARRAY.
-    PARA QUE NÃO HAJA ESSE CONFLITO, EU UTILIZEI SOMAR POR 1001
--->
