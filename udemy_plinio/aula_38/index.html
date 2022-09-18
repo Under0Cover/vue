@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 38</title>
+</head>
+<body>
+    <!-- DOCUMENTO MODELO EXEMPLIFICANDO TUDO QUE FOI ENSINADO ATÉ AGORA  -->
+    <div id="app">
+        <h3 v-if="mostrarMensagem">Título alterado!</h3>
+        <p>Título: {{ titulo }}</p>
+        <p>Título lower case: {{ tituloLowerCase }}</p>
+        <input v-model="novoTitulo">
+        <button @click="alterarTitulo">Alterar titulo</button>
+    </div>
+
+    <script type="text/javascript">
+    
+        new Vue({
+            el: '#app',
+            data: {
+                titulo: 'Instância Vue',
+                novoTitulo: '',
+                mostrarMensagem: false
+            },
+            methods: {
+                alterarTitulo: function() {
+                    this.titulo = this.novoTitulo;
+                    this.novoTitulo = '';
+                }
+            },
+            computed: {
+                tituloLowerCase: function() {
+                    return this.titulo.toLowerCase().split(' ').join('-');
+                }
+            },
+            watch: {
+                titulo: function(novoTitulo, antigoTitulo) {
+                    console.log('Título alterado: ', 'de "', antigoTitulo, '" para "', novoTitulo, '"');
+                    this.mostrarMensagem = true;
+                    var self = this;
+                    setTimeout(function () { 
+                        self.mostrarMensagem = false; 
+                    }, 3000);
+                }
+            }
+        });
+
+    </script>
+    
+</body>
+
+</html>
