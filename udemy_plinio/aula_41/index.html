@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 41</title>
+</head>
+<body>
+    <div id='app'>
+        <h2>Instância Vue</h2>
+        <p>{{ titulo }}</p>
+        
+        <h3>Propriedades Dinâmicas</h3>
+        <p>{{ novaPropriedade }}</p>
+        <p>{{ usuario }}</p>
+    </div>
+
+    <script>
+        var vueModel = new Vue({
+            el: '#app',
+            data: {
+                titulo: 'Curso de VueJS',
+                usuario: {}
+            }
+        });
+
+        // vueModel.novaPropriedade = 'Nova propriedade'; // Não reativo
+        console.log(vueModel);
+
+        setTimeout(() => {
+            vueModel.novaPropriedade = 'Nova propriedade'; // Forma incorreta de criar novas propriedades
+            vueModel.$set(vueModel.usuario, 'nome', 'Plínio Naves'); // Forma correta de criar novas propriedades
+            setTimeout(function(){
+                vueModel.novaPropriedade = 'Nova propriedade alterada'; // Forma incorreta de criar novas propriedades
+                Vue.set(vueModel.usuario, 'email', 'plinio@email.com'); // Forma correta de criar novas propriedades
+            }, 3000);
+        }, 3000);
+    </script>
+</body>
+</html>
