@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 39</title>
+</head>
+<body>
+    <!-- ISNTÂNCIA VUE 1  -->
+    <div id="app1">
+        <h2>INSTÂNCIA VUE 1</h2>
+        <h3 v-if="mostrarMensagem">Título alterado!</h3>
+        <p>Título: {{ titulo }}</p>
+        <p>Título lower case: {{ tituloLowerCase }}</p>
+        <input v-model="novoTitulo">
+        <button @click="alterarTitulo">Alterar titulo</button>
+    </div>
+
+    <!-- ISNTÂNCIA VUE 2  -->
+    <div id="app2">
+        <h2>INSTÂNCIA VUE 2</h2>
+        <p>Título: {{ titulo }}</p>
+    </div>
+
+    <script type="text/javascript">
+    
+        // INSTÂNCIA VUE 1
+        new Vue({
+            el: '#app1',
+            data: {
+                titulo: 'Instância Vue 1',
+                novoTitulo: '',
+                mostrarMensagem: false
+            },
+            methods: {
+                alterarTitulo: function() {
+                    this.titulo = this.novoTitulo;
+                    this.novoTitulo = '';
+                }
+            },
+            computed: {
+                tituloLowerCase: function() {
+                    return this.titulo.toLowerCase().split(' ').join('-');
+                }
+            },
+            watch: {
+                titulo: function(novoTitulo, antigoTitulo) {
+                    console.log('Título alterado: ', 'de "', antigoTitulo, '" para "', novoTitulo, '"');
+                    this.mostrarMensagem = true;
+                    var self = this;
+                    setTimeout(function () { 
+                        self.mostrarMensagem = false; 
+                    }, 3000);
+                }
+            }
+        });
+
+        // INSTÂNCIA VUE 2
+        new Vue({
+            el: '#app2',
+            data: {
+                titulo: 'Instância Vue 2'
+            }
+        });
+
+    </script>
+    
+</body>
+
+</html>
