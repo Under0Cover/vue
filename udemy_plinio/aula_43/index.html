@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 01</title>
+</head>
+<body style="background-color: darkblue; color: white;">
+    <div id='app'>
+        <!-- 
+            ESTE SERÁ O ELEMENTO QUE SOFRERÁ AS MODIFICAÇÕES NO DOM 
+            AO INVÉS DA QUERY OU DO ID, VINDOS DO JS
+            VAMOS USAR O REF, DO VUE
+        -->
+        <h2 ref="meuTitulo">{{ titulo }}</h2>
+        <button @click="alterarTitulo">Alterar título</button>
+        <!-- 
+            O ATRIBUTO REF NÃO É UMA DIRETIVA
+         -->
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                titulo: 'Vue'
+            },
+            methods: {
+                alterarTitulo: function(event) {
+                    this.$refs.meuTitulo.innerHTML = 'Curso de Vue';
+                }
+            }
+        });
+
+        console.log(vm);
+
+        setTimeout(function(){
+            vm.titulo = 'Instância Vue';
+        }, 3000);
+
+        setTimeout(function(){
+            console.log(vm);
+        }, 3100);
+        
+
+    </script>
+</body>
+<!-- 
+    VAMOS ACESSAR OS ELEMENTOS DO DOM ATRÁVES DO VUE.
+    NOTA: PELO JAVASCRIPT, PODERÍAMOS USAR O QUERYSELECTOR E O GETELEMENTBYID
+
+
+    O VUE MANIPULA DIRETAMENTO O DOM.
+    O QUE O VUE FAZ, RESUMIDAMENTE, É CRIAR UMA CÓPIA DO CÓDIGO HTML "ORIGIAL (ORIGINAL, LEIA-SE: ANTES DAS MUDANÇAS DO VUE)"
+    E A PARTE MANIPULADA, É ESSA CÓPIA, NÃO O CHAMADO, ORIGINAL.
+    PARA PROVAR ESSA AÇÃO, VAMOS IMPLEMENTAR A FUNÇÃO SETTIMEOUT
+
+    NO EXEMPLO DELE, HOUVE A MUDANÇA MESMO ELE CLICANDO NO BOTÃO, PÓREM, NÃO FOI O QUE ACONTECEU COMIGO.
+    CASO EU MUDE NO BOTÃO, ELE NÃO EXIBE O TÍTULO DA FUNÇÃO SETTIMEOUT, E SEM CLICAR NO BOTÃO, ELE FAZ A ALTERAÇÃO
+
+    E LOGADO NO CONSOLE, DÁ PRA VER QUE A PROPRIEDADE TÍTULO FOI MODIFICA, MAS NÃO EXIBIDA.
+ -->
+</html>
