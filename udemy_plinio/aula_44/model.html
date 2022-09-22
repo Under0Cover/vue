@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 44</title>
+</head>
+<body>
+    <div id='app'>
+        <h2>{{ curso }}</h2>
+    </div>
+    
+    <div id="app2"></div>
+
+    <script>
+        var vueModel1 = new Vue({
+            data: {
+                curso: 'Curso de VueJS'
+            }
+        });
+
+        setTimeout(function (){
+            vueModel1.$mount('#app');
+        }, 3000);
+
+        var vueModel2 = new Vue({
+            template: '<h2>Usando Template</h2>'
+        });
+
+        vueModel2.$mount();
+        document.getElementById('app2').appendChild(vueModel2.$el);
+    </script>
+</body>
+</html>
+<!-- 
+    ATÉ AGORA, UTILIZAMOS DA PROPRIEDADE 'EL' DO VUE, PARA CONTROLAR A TAG HTML COM O ID CORRESPONDENTE.
+    A PROPRIEDADE 'EL' É O ELO DE LIGAÇÃO DO VUE COM AS TAGS HTML.
+
+    SEGUNDO O INSTRUTOR, PODERÁ HAVER SITUAÇÕES EM QUE AINDA NÃO SABEMOS EM QUAL TAG HTML, POR ASSIM DIZER, NÓS VAMOS MONTAR A APLICAÇÃO VUE, OU AINDA,
+    ESSA TAG HTML, PODE AINDA NEM EXISTIR.
+
+    UTILIZANDO DESSA IDEIA DE DESCONHECIMENTO DO PONTO DE LIGAÇÃO DO VUE COM O HTML, TEMOS ALGUMAS OPÇÕES PARA CONECTAR O VUE.
+    ESSAS OPÇÕES SÃO DEMONSTRADAS ACIMA.
+
+    FORMAS DE CONECTAR O VUE COM O HTML:
+        - A PROPRIEDADE 'EL'
+        - A FUNÇÃO MOUNT COM O ID SETADO
+        - A FUNÇÃO MOUNT SEM O ID E O ID ANEXADO POSTERIORMENTE COM JAVASCRIPT PURO
+
+    OBS: A PROPRIEDADE TEMPLATE SERVE PARA AJUDAR NA MONTAGEM DO HTML. ESSA PROPRIEDADE IRÁ RECEBER MAIS ATENÇÃO ADIANTE.
+ -->
