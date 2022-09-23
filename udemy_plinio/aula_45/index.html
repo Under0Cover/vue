@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <title>Aula 01</title>
+</head>
+<body>
+    <div id='app'></div>
+    <meu-component></meu-component>
+    <!-- AQUI EMBAIXO HÁ UM PROBLEMA DE RENDERIZAÇÃO -->
+    <meu-component></meu-component>
+    <hr>
+
+    <!-- COM COMPONENTE REGISTRADO -->
+    <div id="app2">
+        <h2>Instância 01</h2>
+        <component></component>
+        <component></component>
+    </div>
+    <hr>
+
+    <!-- REUTILIZANDO O COMPONENTE -->
+    <div id="app3"></div>
+
+    <script>
+        
+        var vueModel = new Vue({
+            el: 'meu-component',
+            // NA PROPRIEDADE 'EL' NÃO FAZ DIFERENÇA SE UTILIZAMOS UMA 'TAG' HTML, UM ID OU UMA CLASSE.
+            template: '<h2>Curso de VueJS</h2>'
+        });
+
+        /*
+        DESSA FORMA HÁ O FUNCIONAMENTO CORRETO DO LIGAÇÃO ENTRE O TEMPLATE E O COMPONENTE.
+        MAS COMO ESTAMOS FALANDO DE REUTILIZAÇÃO DOS CÓDIGOS, CASO SEJA NECESSÁRIO REUTILIZAR O COMPONENTE, NÃO HAVERÁ FUNCIONAMENTO CORRETO.
+        INVALIDANDO ASSIM A IDEIA DE REUTILIZAÇÃO.
+        */
+       /*
+       PARA TRABALHAR COM COMPONENTES NO VUE, ANTES DE UTILIZA-LO, VAMOS PRECISAR REGISTRA-LO.
+       AINDA FALAREMOS SOBRE COMPONENTES MAIS A FRENTE, MAS DE AGORA, VAMOS FAZER O SEU REGISTRO.
+       PARA ESSE REGISTRO, VAMOS UTILIZAR UM MÉTODO ESTÁTICO DO VUE CHAMADO 'COMPONENT'.
+       NO PRIMEIRO PÂRAMETRO VAMOS PASSAR O SELETOR A SER UTILIZADO PELO COMPONENT.
+       NO SEGUNDO PÂRAMETRO VAMOS PASSAR UM OBJETO JAVASCRIPT COM PRATICAMENTE AS MESMAS INFORMAÇÕES QUE PASSAMOS NO NOSSO VUEMODEL
+       */
+      
+        Vue.component('component', {
+            template: '<h3>Meu primeiro Component Vue</h3>'
+        });
+
+        var vueModel1 = new Vue({
+            el: '#app2'
+        });
+
+        // UM EXEMPLO DE REUTILIZAÇÃO DO COMPONENTE
+        var vueModel2 = new Vue({
+            el: '#app3',
+            template: '<div><h2>Instância 02</h2><component></component></div>'
+        });
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- 
+    COMEÇAMOS A VER INFORMAÇÕES SOBRE TEMPLATE NA AULA ANTERIOR, E VAMOS DAR SEQUÊNCIA A OUTRAS INFORMAÇÕES SOBRE A PROPRIEDADE.
+    A IDEIA DESSA AULA É CRIAR UM COMPONENTE REUTILIZAVEL
+ -->
