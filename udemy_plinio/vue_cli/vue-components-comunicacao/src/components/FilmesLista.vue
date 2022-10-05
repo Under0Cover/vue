@@ -6,12 +6,13 @@
 
       <h2>Filmes</h2>
 
-      <ul class="list-group list-group-flush">
-        <FilmesListaIten
-          v-for="(filme, index) in filmes"
-          :key="index"
-          :filmeTitulo="filme" />
-      </ul>
+        <ul class="list-group list-group-flush">
+          <!-- <FilmesListaIten
+            v-for="(filme, index) in filmes"
+            :key="index"
+            :filmeTitulo="filme" /> -->
+        </ul>
+        <FilmesListaIten filmeTitulo="A Marvel"/>
     </div>
 
     <!-- coluna 2 -->
@@ -33,7 +34,7 @@ export default {
   components: {
     FilmesListaIten,
     FilmesListaItenInfo
-  },
+},
     data() {
      return {
       filmes: [

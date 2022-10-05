@@ -8,7 +8,16 @@
 <script>
     export default {
         props: {
-            filmeTitulo: String
+            filmeTitulo: {
+                type: String,
+                // required: true,
+                default() {
+                    return 'Os Vingadores'
+                },
+                validator(filmeTitulo) {
+                    return filmeTitulo.includes('Marvel');
+                }  
+            }
         },
         computed: {
             filmeTituloConcatenado(){
