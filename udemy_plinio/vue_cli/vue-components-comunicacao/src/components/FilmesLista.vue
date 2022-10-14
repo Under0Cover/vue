@@ -11,6 +11,7 @@
             v-for="filme in filmes"
             :key="filme.id"
             :filme='filme'
+            :class="aplicarClasseAtiva(filme)"
             @selecionarFilme="filmeSelecionado = $event" />
         </ul>
         <!-- <FilmesListaIten filmeTitulo="A Marvel"/> -->
@@ -45,6 +46,13 @@ export default {
         { id: 4, titulo: "Deadpool 2", ano:2038, diretor: "Stann Lee" }
       ],
       filmeSelecionado: undefined
+    }
+  },
+  methods: {
+    aplicarClasseAtiva(filmeIterado){
+      return {
+        active: this.filmeSelecionado && this.filmeSelecionado.id === filmeIterado.id
+      }
     }
   }
 }
