@@ -10,7 +10,8 @@
           <FilmesListaIten
             v-for="filme in filmes"
             :key="filme.id"
-            :filme='filme' />
+            :filme='filme'
+            @selecionarFilme="filmeSelecionado = $event" />
         </ul>
         <!-- <FilmesListaIten filmeTitulo="A Marvel"/> -->
     </div>
@@ -42,7 +43,8 @@ export default {
         { id: 2, titulo: "Homem Formiga e a Vespa", ano:2018, diretor: "Stann Lee" },
         { id: 3, titulo: "Pantera Negra", ano:2028, diretor: "Stann Lee" },
         { id: 4, titulo: "Deadpool 2", ano:2038, diretor: "Stann Lee" }
-      ]
+      ],
+      filmeSelecionado: undefined
     }
   }
 }
