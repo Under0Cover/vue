@@ -10,8 +10,7 @@
           <FilmesListaIten
             v-for="filme in filmes"
             :key="filme.id"
-            placeholder="Título do Filme"
-            v-bind="filme"/>
+            :filme='filme' />
         </ul>
         <!-- <FilmesListaIten filmeTitulo="A Marvel"/> -->
     </div>
