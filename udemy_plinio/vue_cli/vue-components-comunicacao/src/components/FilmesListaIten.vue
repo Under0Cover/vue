@@ -3,10 +3,13 @@
         <span>{{ filmeTituloConcatenado }} | {{ ano }} </span>
         <button class="btn btn-success float-right">Selecionar</button>
     </li>
+    <hr>
+    <input type="text" :value="titulo" :placeholder="$attrs.placeholder">
 </template>
 
 <script>
     export default {
+        inheritAttrs: false,
         props: {
             titulo: {
                 type: String,
