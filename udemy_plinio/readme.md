@@ -13,4 +13,5 @@
 
 ##### [Git Clone] (https://github.com/Under0Cover/vue.git)
 
-##### Última aula: Detectando mudanças em objetos
+* Recentemente encontrei problemas de seguir aprendendo pelas vídeo aulas. As respostas que eu encontrei na internet, eram que alguns códigos estavam na versão 2 do Vue, enquanto eu estava utilizando a versão 3.
+* Com o crescente número de erro, até pelas modificações que a linguagem enfrentou, eu parei ondamento do curso e vou começar um que seja exclusivamente de Vue 3
